@@ -11,7 +11,8 @@ const authMiddleware = ( req, res, next ) =>
             throw new ApiError( 401, "Authorization token required" )
         }
 
-        const token = authHeader.split(" ")[1]
+        console.log( "AUTH HEADER:", req.headers.authorization );
+        const token = authHeader.split( " " )[ 1 ]
 
         if ( !token )
         {
@@ -24,10 +25,16 @@ const authMiddleware = ( req, res, next ) =>
         )
         req.staff = decoded
         next()
-    } catch(error)
+    } catch ( error )
     {
-        throw new ApiError( 401, "Invalid or expired token" )
+        console.log( "JWT ERROR NAME:", error.name );
+        console.log( "JWT ERROR MESSAGE:", error.message );
+
+        throw new ApiError(
+            401,
+            `JWT Error: ${ error.message }`
+        );
     }
 }
 
-export {authMiddleware}
+export { authMiddleware }
