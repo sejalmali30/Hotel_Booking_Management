@@ -44,4 +44,11 @@ router.delete(
     deleteRoomController
 )
 
+
+
+router.get(
+    "/:id",
+    authMiddleware,
+    getRoomByIdController
+);
 export {router}

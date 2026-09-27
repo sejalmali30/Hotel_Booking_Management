@@ -88,8 +88,15 @@ const getRoomByIdController = async ( req, res ) =>
         )
     } catch ( error )
     {
-        console.log( error )
-        throw new ApiError( 500, "Internal server error" )
+        console.error( "GET ROOMS ERROR:", error );
+
+        return res.status( error.statusCode || 500 ).json(
+            new ApiResponse(
+                error.statusCode || 500,
+                null,
+                error.message || "Internal server error"
+            )
+        )
     }
 }
 
