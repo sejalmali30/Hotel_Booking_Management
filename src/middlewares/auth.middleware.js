@@ -27,13 +27,13 @@ const authMiddleware = ( req, res, next ) =>
         next()
     } catch ( error )
     {
-        console.log( "JWT ERROR NAME:", error.name );
-        console.log( "JWT ERROR MESSAGE:", error.message );
+        console.error( "REGISTER GUEST ERROR:", error );
 
-        throw new ApiError(
-            401,
-            `JWT Error: ${ error.message }`
-        );
+        return res.status( 500 ).json( {
+            success: false,
+            message: error.message,
+            error: error.code
+        } );
     }
 }
 
