@@ -7,13 +7,20 @@ import {
     getReservationByIdController,
     updateReservationController
 } from "../controllers/reservation.controller.js";
-
+import {
+    checkInController
+} from "../controllers/checkIn.controller.js";
 import {authMiddleware} from "../middlewares/auth.middleware.js";
 import {roleMiddleware} from "../middlewares/role.middleware.js";
 
 const router = express.Router();
 
-
+router.post(
+    "/:id/checkin",
+    authMiddleware,
+    roleMiddleware("admin", "manager", "receptionist"),
+    checkInController
+);
 // Search available rooms
 router.get(
     "/rooms/available",
