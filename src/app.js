@@ -8,6 +8,7 @@ import {router as reservationRoutes} from "./routes/reservation.routes.js";
 import {router as checkInRoutes} from "./routes/checkIn.routes.js";
 import {router as invoiceRoutes} from "./routes/invoice.routes.js";
 
+
 const app = express();
 app.use(cors({
     origin: process.env.CORS_ORIGIN,
